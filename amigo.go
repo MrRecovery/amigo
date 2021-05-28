@@ -19,7 +19,7 @@ var (
 	errNotConnected     = errors.New("Not connected to Asterisk")
 )
 
-type handlerFunc func(map[string]string)
+type handlerFunc func(map[string]string, Amigo)
 type eventHandlerFunc func(string)
 
 // Amigo is a main package struct
@@ -189,19 +189,19 @@ func (a *Amigo) Connect() {
 					}
 
 					if a.handlers[event] != nil {
-						a.handlers[event](ev)
+						a.handlers[event](ev, *a)
 					}
 
 					if a.defaultHandler != nil {
-						a.defaultHandler(ev)
+						a.defaultHandler(ev, *a)
 					}
 				} else {
 					if a.defaultHandler != nil {
-						a.defaultHandler(e)
+						a.defaultHandler(e, *a)
 					}
 
 					if a.handlers[event] != nil {
-						a.handlers[event](e)
+						a.handlers[event](e, *a)
 					}
 				}
 			}
