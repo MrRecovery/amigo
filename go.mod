@@ -1,3 +1,3 @@
-module github.com/ivahaev/amigo
+module github.com/mrrecovery/amigo
 
 go 1.13
